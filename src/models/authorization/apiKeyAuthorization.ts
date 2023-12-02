@@ -1,5 +1,5 @@
 import { Authorization } from './authorization';
-import { ApiKeyAddTo } from './config';
+import { ApiKeyAddTo } from '../config/config';
 import { IsString } from 'class-validator';
 
 export class ApiKeyAuthorization extends Authorization {

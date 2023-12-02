@@ -1,11 +1,11 @@
 import { IsArray, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import 'reflect-metadata';
-import { DataSource } from './dataSource';
-import { Authorization } from './authorization';
+import { Datasource } from '../datasource/datasource';
+import { Authorization } from '../authorization/authorization';
 import { Category } from './category';
-import { BasicAuthorization } from './basicAuthorization';
-import { ApiKeyAuthorization } from './apiKeyAuthorization';
+import { BasicAuthorization } from '../authorization/basicAuthorization';
+import { ApiKeyAuthorization } from '../authorization/apiKeyAuthorization';
 
 export class Config {
   @IsString()
@@ -20,8 +20,8 @@ export class Config {
   swaggerUrl?: string;
 
   @ValidateNested()
-  @Type(() => DataSource)
-  dataSource: DataSource;
+  @Type(() => Datasource)
+  dataSource: Datasource;
   @ValidateNested()
   @Type(() => Authorization, {
     discriminator: {

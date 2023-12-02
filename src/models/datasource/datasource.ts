@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class DataSource {
+export class Datasource {
   @IsString()
   baseUrl: string;
 }
