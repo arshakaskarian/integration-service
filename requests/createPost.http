@@ -1,0 +1,82 @@
+# Integration
+
+###
+# @name http://localhost:3000
+POST http://localhost:3000
+Content-Type: application/json
+
+{
+  "name": "World bank integration",
+  "description": "",
+  "dataSource": {
+    "baseUrl": "http://localhost:8080/api"
+  },
+  "authorization": {
+    "username": "admin",
+    "password": "admin",
+    "authType": "basic"
+  },
+  "categories": [
+    {
+      "name": "User",
+      "endpoint": "/findAll",
+      "method": "get",
+      "fields": [
+        {
+          "externalName": "name",
+          "internalName": "fullName",
+          "transformationFunction": "toMultilingual",
+          "defaultValue": ""
+        },
+        {
+          "externalName": "username",
+          "internalName": "login",
+          "transformationFunction": "toMultilingual",
+          "defaultValue": ""
+        },
+        {
+          "externalName": "email",
+          "internalName": "userEmail",
+          "transformationFunction": "toMultilingual",
+          "defaultValue": ""
+        },
+        {
+          "externalName": "address.street",
+          "internalName": "street",
+          "transformationFunction": "toMultilingual",
+          "defaultValue": ""
+        },
+        {
+          "externalName": "address.city",
+          "internalName": "city",
+          "transformationFunction": "toMultilingual",
+          "defaultValue": ""
+        },
+        {
+          "externalName": "address.geo.lat",
+          "internalName": "lat",
+          "transformationFunction": "toMultilingual",
+          "defaultValue": ""
+        },
+        {
+          "externalName": "address.geo.lng",
+          "internalName": "lng",
+          "transformationFunction": "toMultilingual",
+          "defaultValue": ""
+        },
+        {
+          "externalName": "company.name",
+          "internalName": "companyName",
+          "transformationFunction": "toMultilingual",
+          "defaultValue": ""
+        },
+        {
+          "externalName": "company.name",
+          "internalName": "test.test.name.test.age.go.lalala",
+          "transformationFunction": "toMultilingual",
+          "defaultValue": ""
+        }
+      ]
+    }
+  ]
+}
