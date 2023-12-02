@@ -1,9 +1,10 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Config, ReturnType } from './models/config/config';
+import { Config } from './models/config/config';
 import { Field } from './models/config/field';
 import { Authorization } from './models/authorization/authorization';
 import { BasicAuthorization } from './models/authorization/basicAuthorization';
+import { ReturnType } from "./models/types";
 
 const _ = require('lodash');
 

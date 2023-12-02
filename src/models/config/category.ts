@@ -1,7 +1,7 @@
 import { Field } from './field';
-import { HttpMethod, ReturnType } from './config';
 import { IsArray, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
+import {HttpMethod, ReturnType} from "../types";
 
 export class Category {
   @IsString()

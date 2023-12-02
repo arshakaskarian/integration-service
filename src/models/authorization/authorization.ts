@@ -1,4 +1,4 @@
-import { AuthType } from '../config/config';
+import { AuthType } from '../types';
 import { IsString } from 'class-validator';
 
 export abstract class Authorization {
