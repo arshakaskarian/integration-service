@@ -31,12 +31,11 @@ export class AppController {
     );
     if (response.ok) {
       try {
-        result = await this.transform(returnType, result, response, fieldsMap);
+        return await this.transform(returnType, response, fieldsMap);
       } catch (error) {
         return error.message;
       }
     }
-    return result;
   }
 
   private async doCall(
@@ -51,7 +50,7 @@ export class AppController {
       method: method.toLowerCase(),
       headers,
       // body: new URLSearchParams(authReq)
-    });
+    })
     return response;
   }
 
@@ -65,20 +64,16 @@ export class AppController {
 
   private async transform(
     returnType: ReturnType,
-    result: any,
     response: Response,
     fieldsMap: any,
   ) {
+    const jsonResponse = await response.json();
     switch (returnType) {
       case 'array': {
-        result = [];
-        this.transformToArray(await response.json(), fieldsMap, result);
-        break;
+        return  this.transformToArray(jsonResponse, fieldsMap);
       }
       case 'object': {
-        result = {};
-        result = this.transformToObject(fieldsMap, await response.json());
-        break;
+        return this.transformToObject(fieldsMap, jsonResponse);
       }
       case 'number': {
         throw new Error('Case for number not implement yet');
@@ -90,15 +85,14 @@ export class AppController {
         throw new Error(`Case for ${returnType} not implement yet`);
       }
     }
-    return result;
   }
 
-  function;
-
-  transformToArray(data: any, fieldsMap: any, result: any[]): void {
+  transformToArray(data: any, fieldsMap: any): any[] {
+    let result = [];
     data.forEach((item: any) => {
       result.push(this.transformToObject(fieldsMap, item));
     });
+    return result;
   }
 
   private transformToObject(fieldsMap: any, item: any) {
