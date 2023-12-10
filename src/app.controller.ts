@@ -5,12 +5,14 @@ import { Field } from './models/config/field';
 import { Authorization } from './models/authorization/authorization';
 import { BasicAuthorization } from './models/authorization/basicAuthorization';
 import { ReturnType } from "./models/types";
+import {AuthorizationService} from "./services/authorization.service";
 
 const _ = require('lodash');
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService,
+              private readonly authorizationService :AuthorizationService) {}
 
   @Get()
   getHello(): string {
@@ -42,10 +44,10 @@ export class AppController {
     baseUrl: string,
     endpoint: string,
     method: 'get' | 'post',
-    authorization,
+    authorizationData: Authorization,
   ) {
     console.log(fetch);
-    const headers = this.authorization(authorization);
+    const headers = this.authorizationService.authorization(authorizationData);
     const response: Response = await fetch(`${baseUrl}${endpoint}`, {
       method: method.toLowerCase(),
       headers,
@@ -103,13 +105,4 @@ export class AppController {
     return transformedObject;
   }
 
-  authorization(auth: Authorization): any {
-    if (auth instanceof BasicAuthorization) {
-      return {
-        Authorization:
-          'Basic ' +
-          Buffer.from(auth.username + ':' + auth.password).toString('base64'),
-      };
-    }
-  }
 }
